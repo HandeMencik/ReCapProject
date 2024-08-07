@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Abstract
 {
-    //IEntity implemente eden class bir veri tabenı tablosudur
+    //IEntity implemente eden class bir veri tabanı tablosudur
     public interface IEntity
     {
 

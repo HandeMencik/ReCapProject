@@ -1,11 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Bussines.Concrete;
-using DataAccess.Concrete.InMemory;
+using DataAccess.Concrete.EntityFramework;
 
-CarManager carManager = new CarManager(new InMemoryCarDal());
 
-foreach (var car in carManager.GetAll())
+CarManager carManager = new CarManager(new EfCarDal());
+
+foreach (var car in carManager.GetCarsByColorId(1))
 {
-    Console.WriteLine(car.Description);
+    Console.WriteLine(car.DailyPrice);
 }
