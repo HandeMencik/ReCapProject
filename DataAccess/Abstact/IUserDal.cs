@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstact
 {
-    public interface IBrandDal:IEntityRepository<Brand>
+    public interface IUserDal:IEntityRepository<User>
     {
     }
 }

@@ -6,34 +6,16 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Core.DataAccess.EntityFramework;
+using Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Core.DataAccess;
+using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfColorDal : IColorDal
+    public class EfColorDal :EfEntityRepositoryBase<Entities.Concrete.Color,ReCapContext>,IColorDal
     {
-        public void Add(Entities.Concrete.Color entity)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Delete(Entities.Concrete.Color entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Entities.Concrete.Color Get(Expression<Func<Entities.Concrete.Color, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Entities.Concrete.Color> GetAll(Expression<Func<Entities.Concrete.Color, bool>> filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Entities.Concrete.Color entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
