@@ -1,6 +1,8 @@
 ﻿using Bussines.Abstract;
+using Bussines.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstact;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -21,27 +23,36 @@ namespace Bussines.Concrete
 
         public IResult Add(Rental rental)
         {
-            throw new NotImplementedException();
+            bool carRentalStatus=!(_rentalDal.GetAll(r=>r.CarId==rental.CarId && r.ReturnDate==null).Any());
+
+            if (carRentalStatus==false)
+            {
+                return new ErrorResult(Messages.CarIsNotRentalStatus);
+            }
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult Delete(Rental rental)
         {
-            throw new NotImplementedException();
+            _rentalDal.Delete(rental);
+            return new SuccessResult();
         }
 
         public IDataResult<List<Rental>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
         public IDataResult<Rental> GetById(int rentalId)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == rentalId), Messages.ProductAdded);
         }
 
         public IResult Update(Rental rental)
         {
-            throw new NotImplementedException();
+            _rentalDal.Update(rental);
+            return new SuccessResult();
         }
     }
 }
