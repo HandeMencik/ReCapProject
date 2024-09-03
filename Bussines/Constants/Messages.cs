@@ -10,7 +10,9 @@ namespace Bussines.Constants
     {
         public static string ProductAdded = "Ürün eklendi";
         public static string ProductNameInvalid = "Ürün ismi geçersiz.";
-       
 
+        public static string CarIsNotRentalStatus = "Araç kiralama statüsünde değil!";
+
+        public static string RentalAdded = "Araç kiralandı";
     }
 }
