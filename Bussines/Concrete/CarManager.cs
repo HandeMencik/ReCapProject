@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Bussines.Concrete
 {
-    public class CarManager : ICarSevice
+    public class CarManager : ICarService
     {
         ICarDal _carDal;
 
@@ -61,12 +61,12 @@ namespace Bussines.Concrete
 
 
 
-        IDataResult<Car> ICarSevice.GetCarsByBrandId(int id)
+        IDataResult<Car> ICarService.GetCarsByBrandId(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.BrandId == id));
         }
 
-        IDataResult<Car> ICarSevice.GetCarsByColorId(int id)
+        IDataResult<Car> ICarService.GetCarsByColorId(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.ColorId == id));
         }

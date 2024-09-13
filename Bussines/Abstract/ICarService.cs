@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bussines.Abstract
 {
-    public interface ICarSevice
+    public interface ICarService
     {
         IResult Add(Car car);
         IResult Update(Car car);
