@@ -15,63 +15,41 @@ namespace WebAPI.Controllers
         {
             _userService = userService;
         }
-        [HttpGet("getall")]
-        public IActionResult Get()
+        // Kullanıcının yetkilerini getirmek için endpoint
+        [HttpGet("getclaims")]
+        public IActionResult GetClaims([FromQuery] int userId)
         {
-
-            var result = _userService.GetAll();
-            if (result.Success)
+            var user = _userService.GetById(userId);
+            if (user == null)
             {
-                return Ok(result);
+                return NotFound("User not found.");
             }
-            return BadRequest(result);
 
+            // `user` nesnesini `GetClaims` metoduna gönderiyoruz.
+            var claims = _userService.GetClaims(user);
+            return Ok(claims);
         }
 
-        [HttpGet("getbyid")]
-        public IActionResult Get(int id)
-        {
-            var result = _userService.GetById(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-
+        // Yeni bir kullanıcı eklemek için endpoint
         [HttpPost("add")]
         public IActionResult Add(User user)
         {
-            var result = _userService.Add(user);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result.Message);
-
+            _userService.Add(user);
+            return Ok("User added successfully.");
         }
 
-        [HttpPost("update")]
-        public IActionResult Update(User user)
+        // E-posta ile kullanıcı aramak için endpoint
+        [HttpGet("getbymail")]
+        public IActionResult GetByMail([FromQuery] string email)
         {
-            var result = _userService.Update(user);
-            if (result.Success)
+            var user = _userService.GetByMail(email);
+            if (user == null)
             {
-                return Ok(result);
+                return NotFound("User not found.");
             }
-            return BadRequest(result);
+
+            return Ok(user);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(User user)
-        {
-            var result = _userService.Delete(user);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
     }
-}
+    }

@@ -2,7 +2,7 @@
 using Bussines.Constants;
 using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Results;
-using DataAccess.Abstact;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using System;

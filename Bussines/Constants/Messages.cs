@@ -14,5 +14,6 @@ namespace Bussines.Constants
         public static string CarIsNotRentalStatus = "Araç kiralama statüsünde değil!";
 
         public static string RentalAdded = "Araç kiralandı";
+        public static string AuthorizationDenied="Yetkiniz Yok.";
     }
 }

@@ -6,7 +6,8 @@ using Bussines.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Interceptors;
-using DataAccess.Abstact;
+using Core.Utilities.Security.JWT;
+using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,8 @@ namespace Bussines.DependencyResolvers.Autofac
 
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
 
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
 
 
