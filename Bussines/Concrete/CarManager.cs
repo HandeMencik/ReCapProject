@@ -2,6 +2,8 @@
 using Bussines.BusinessAspects.Autofac;
 using Bussines.Constants;
 using Bussines.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -30,8 +32,8 @@ namespace Bussines.Concrete
 
         //Claim??
         [SecuredOperation("car.Add,admin")]
-
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
 
@@ -41,6 +43,7 @@ namespace Bussines.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
@@ -55,7 +58,7 @@ namespace Bussines.Concrete
             return new SuccessResult();
         }
 
-
+        [CacheAspect] //Key(Cache'e vardiğimiz isimdir, value 
         public IDataResult<List<Car>> GetAll()
         {
             // iş kodları
@@ -81,9 +84,16 @@ namespace Bussines.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.ColorId == id));
         }
 
+        [CacheAspect]
         public IDataResult<Car> GetById(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id));
+        }
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            throw new NotImplementedException();
         }
     }
 }
